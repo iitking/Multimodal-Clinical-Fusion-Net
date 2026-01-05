@@ -1,0 +1,22 @@
+# Python environments & caches
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+.venv/
+env/
+venv/
+ENV/
+
+# Large Checkpoints (heavy raw training artifacts)
+outputs/checkpoints/*.pt
+outputs/checkpoints/*.pth
+outputs/checkpoints/*.pkl
+outputs/*.log
+
+# OS & IDE metadata
+.DS_Store
+.idea/
+.vscode/
+*.swp
