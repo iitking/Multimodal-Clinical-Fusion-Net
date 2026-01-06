@@ -1,0 +1,90 @@
+# Multimodal Clinical Fusion Network Configuration
+
+experiment:
+  name: "multimodal_clinical_fusion_v1"
+  seed: 42
+  device: "auto" # "cuda", "mps", "cpu", or "auto"
+
+data:
+  tabular_path: "data/raw/tabular/patient_records.csv"
+  images_dir: "data/raw/images"
+  processed_metadata_path: "data/processed/paired_metadata.csv"
+  
+  # Clinical tabular features
+  numerical_features:
+    - "age"
+    - "heart_rate"
+    - "sbp"            # Systolic Blood Pressure
+    - "dbp"            # Diastolic Blood Pressure
+    - "resp_rate"      # Respiratory Rate
+    - "spo2"           # Oxygen Saturation
+    - "temp"           # Body Temperature
+    - "wbc"            # White Blood Cell count
+    - "creatinine"
+    - "glucose"
+    - "hemoglobin"
+    - "platelets"
+  
+  categorical_features: []
+  
+  target_column: "outcome" # Binary risk indicator (e.g. 1 = adverse event / high risk, 0 = stable)
+  id_columns:
+    patient_id: "subject_id"
+    study_id: "study_id"
+  
+  image_size: [224, 224]
+  train_split: 0.70
+  val_split: 0.15
+  test_split: 0.15
+  batch_size: 16
+  num_workers: 0
+
+model:
+  tabular_encoder:
+    embed_dim: 128
+    hidden_dims: [128, 128]
+    dropout: 0.2
+    norm_type: "layer_norm" # "batch_norm" or "layer_norm"
+
+  image_encoder:
+    backbone: "resnet34" # "resnet18", "resnet34", "resnet50", "densenet121"
+    pretrained: true
+    embed_dim: 256
+    freeze_backbone_epochs: 2 # Freeze visual backbone for first N epochs
+
+  fusion:
+    strategy: "cross_attention" # Options: "concat", "gated", "cross_attention"
+    fusion_dim: 256
+    num_heads: 4 # For cross_attention
+    dropout: 0.2
+
+  classifier:
+    num_classes: 1 # Binary classification with BCEWithLogitsLoss
+    hidden_dim: 128
+    dropout: 0.2
+
+training:
+  epochs: 15
+  learning_rate: 0.0003
+  weight_decay: 0.0001
+  pos_weight: 1.0 # Adjust for class imbalance if needed
+  lr_scheduler:
+    type: "cosine" # "cosine", "step", "plateau"
+    min_lr: 0.000001
+  early_stopping:
+    patience: 5
+    metric: "val_auroc"
+    mode: "max"
+  checkpoint_dir: "outputs/checkpoints"
+  log_interval: 10
+
+evaluation:
+  plots_dir: "outputs/plots"
+  reports_dir: "outputs/reports"
+  metrics:
+    - "auroc"
+    - "auprc"
+    - "f1_score"
+    - "sensitivity"
+    - "specificity"
+    - "accuracy"
