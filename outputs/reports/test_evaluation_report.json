@@ -1,0 +1,82 @@
+{
+  "checkpoint": "outputs/checkpoints/best_model.pt",
+  "checkpoint_val_auroc": 1.0,
+  "test_encounters": 36,
+  "decision_threshold": 0.5,
+  "metrics": {
+    "tp": 7,
+    "fp": 0,
+    "tn": 29,
+    "fn": 0,
+    "accuracy": 1.0,
+    "sensitivity": 1.0,
+    "specificity": 1.0,
+    "precision": 1.0,
+    "f1_score": 1.0,
+    "brier_score": 0.001512130250864463,
+    "auroc": 1.0,
+    "auprc": 0.9999999999999998
+  },
+  "predictions_preview": [
+    {
+      "subject_id": "SUBJ_10010",
+      "study_id": "STUDY_500013",
+      "ground_truth": 0.0,
+      "predicted_risk": 0.0362
+    },
+    {
+      "subject_id": "SUBJ_10016",
+      "study_id": "STUDY_500022",
+      "ground_truth": 0.0,
+      "predicted_risk": 0.0356
+    },
+    {
+      "subject_id": "SUBJ_10017",
+      "study_id": "STUDY_500023",
+      "ground_truth": 0.0,
+      "predicted_risk": 0.0354
+    },
+    {
+      "subject_id": "SUBJ_10020",
+      "study_id": "STUDY_500026",
+      "ground_truth": 0.0,
+      "predicted_risk": 0.0352
+    },
+    {
+      "subject_id": "SUBJ_10025",
+      "study_id": "STUDY_500031",
+      "ground_truth": 0.0,
+      "predicted_risk": 0.0351
+    },
+    {
+      "subject_id": "SUBJ_10031",
+      "study_id": "STUDY_500040",
+      "ground_truth": 0.0,
+      "predicted_risk": 0.0349
+    },
+    {
+      "subject_id": "SUBJ_10043",
+      "study_id": "STUDY_500055",
+      "ground_truth": 0.0,
+      "predicted_risk": 0.0345
+    },
+    {
+      "subject_id": "SUBJ_10043",
+      "study_id": "STUDY_500056",
+      "ground_truth": 0.0,
+      "predicted_risk": 0.0353
+    },
+    {
+      "subject_id": "SUBJ_10046",
+      "study_id": "STUDY_500059",
+      "ground_truth": 0.0,
+      "predicted_risk": 0.0347
+    },
+    {
+      "subject_id": "SUBJ_10052",
+      "study_id": "STUDY_500067",
+      "ground_truth": 0.0,
+      "predicted_risk": 0.0352
+    }
+  ]
+}
